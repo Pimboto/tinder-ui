@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import Sidebar from './tinder/components/Layout/Sidebar';
-import MainContent from './tinder/components/Layout/MainContent';
-import { ApiProvider } from './tinder/context/ApiContext';
+import Sidebar from './components/Layout/Sidebar';
+import MainContent from './components/Layout/MainContent';
+import { ApiProvider } from './context/ApiContext';
 
 export default function TinderAutomationApp() {
   return (
