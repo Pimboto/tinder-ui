@@ -19,7 +19,7 @@ export default function SessionsList() {
     setActiveTab('logs');
   };
 
-  const handleResume = (sessionId: string) => {
+  /* const handleResume = (sessionId: string) => {
     // Esta funcionalidad estará disponible próximamente
     alert("Próximamente: Funcionalidad para resumir sesiones");
   };
@@ -27,7 +27,7 @@ export default function SessionsList() {
   const handlePause = (sessionId: string) => {
     // Esta funcionalidad estará disponible próximamente
     alert("Próximamente: Funcionalidad para pausar sesiones");
-  };
+  }; */
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -74,10 +74,10 @@ export default function SessionsList() {
                             {getStatusBadge(session.status)}
                           </div>
                           <div>
-                            <div className="font-medium">{session.device?.name ?? 'Dispositivo desconocido'} || iphone</div>
+                            <div className="font-medium">{session.device.name}</div>
                             <div className="text-xs text-muted-foreground">
                               Flujo: {session.flow} • Checkpoint: {
-                                CHECKPOINTS.find(cp => cp.id === session.checkpoint)?.label ?? session.checkpoint
+                                CHECKPOINTS.find(cp => cp.id === session.checkpoint)?.label || session.checkpoint
                               }
                             </div>
                           </div>

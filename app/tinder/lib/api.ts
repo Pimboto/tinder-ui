@@ -13,9 +13,9 @@ export const api = {
     try {
       const response = await fetch(`${API_BASE_URL}${endpoint}`, { headers });
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(`Error fetching ${endpoint}:`, error);
-      return { error: true, message: error.message };
+      return { error: true, message: error instanceof Error ? error.message : String(error) };
     }
   },
   async post(endpoint: string, data: any) {
@@ -26,9 +26,9 @@ export const api = {
         body: JSON.stringify(data)
       });
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(`Error posting to ${endpoint}:`, error);
-      return { error: true, message: error.message };
+      return { error: true, message: error instanceof Error ? error.message : String(error) };
     }
   }
 };

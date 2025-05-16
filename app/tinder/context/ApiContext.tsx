@@ -97,14 +97,53 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       setLoading(prev => ({ ...prev, sessions: true }));
       const data = await api.get('/automation');
       if (data.sessions) {
-        setSessions(data.sessions);
+        // Normalizar datos para que siempre tengan una propiedad 'device'
+        const normalizedSessions = data.sessions.map((session: SessionSummary) => {
+          // Si ya tiene device, usarlo
+          if (session.device) {
+            return session;
+          }
+          
+          // Si tiene deviceInfo pero no device, copiar deviceInfo a device
+          if (session.deviceInfo) {
+            return {
+              ...session,
+              device: session.deviceInfo
+            };
+          }
+          
+          // Si no tiene ni device ni deviceInfo, buscar en la lista de dispositivos
+          if (session.udid) {
+            const matchingDevice = devices.find(d => d.udid === session.udid);
+            if (matchingDevice) {
+              return {
+                ...session,
+                device: matchingDevice
+              };
+            }
+          }
+          
+          // Si todo lo demás falla, proporcionar un dispositivo genérico
+          return {
+            ...session,
+            device: {
+              name: "Dispositivo",
+              udid: session.udid || "desconocido",
+              version: "N/A",
+              isAvailable: false,
+              lastDetected: new Date().toISOString()
+            }
+          };
+        });
+        
+        setSessions(normalizedSessions);
       }
       setLoading(prev => ({ ...prev, sessions: false }));
     };
     fetchSessions();
     const interval = setInterval(fetchSessions, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [devices]);
 
   // Fetch Appium servers
   useEffect(() => {

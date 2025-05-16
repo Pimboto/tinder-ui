@@ -56,7 +56,7 @@ export default function LogsSection() {
               <SelectItem value="none">Seleccionar sesión</SelectItem>
               {sessions.map(session => (
                 <SelectItem key={session.id} value={session.id}>
-                  {session.device?.name ?? 'Dispositivo desconocido'} - {session.flow}
+                  {session.device?.name ?? 'Sin dispositivo'} - {session.flow}
                 </SelectItem>
               ))}
             </SelectContent>

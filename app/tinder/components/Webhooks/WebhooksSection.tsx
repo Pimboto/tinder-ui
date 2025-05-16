@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Webhook } from 'lucide-react';
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 export default function WebhooksSection() {
   return (

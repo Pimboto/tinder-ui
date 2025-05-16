@@ -9,11 +9,19 @@ export interface Device {
 
 export interface SessionSummary {
   id: string;
-  device: Device;
-  appiumPort: number;
+  udid?: string;
+  device?: Device;
+  deviceInfo?: Device;
+  appiumPort?: number;
   status: string;
   flow: string;
   checkpoint: string;
+  startTime?: string;
+  error?: string | null;
+  result?: any | null;
+  infinite?: boolean;
+  runCount?: number;
+  maxRuns?: number;
 }
 
 export interface AppiumServer {

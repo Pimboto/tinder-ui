@@ -29,7 +29,7 @@ export default function CheckpointProgress() {
             return (
               <div key={`progress-${session.id}`} className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span>{session.device?.name ?? 'Dispositivo desconocido'}</span>
+                  <span>{session.device.name}</span>
                   <span className="text-muted-foreground">
                     {currentIndex + 1} / {CHECKPOINTS.length}
                   </span>
